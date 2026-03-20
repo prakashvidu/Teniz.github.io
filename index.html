@@ -1,346 +1,90 @@
 <!DOCTYPE html>
-<html lang="si">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MR.NERO AVIATOR SIGNALS VIP</title>
+    <title>Site Access Suspended</title>
     <style>
-        :root {
-            --neon-blue: #00f2ff;
-            --neon-pink: #ff0055;
-            --gold: #ffcc00;
-            --dark-bg: #05070a;
-            --card-bg: #0f141e;
-        }
-
-        body, html {
+        body {
             margin: 0;
             padding: 0;
-            height: 100%;
-            background: var(--dark-bg);
-            color: white;
-            font-family: 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
+            height: 100vh;
+            color: #333;
         }
 
-        /* --- Password Screen --- */
-        #loginScreen {
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: var(--dark-bg);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 20000;
-        }
-
-        .login-card {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 20px;
-            border: 1px solid var(--neon-pink);
+        .container {
             text-align: center;
-            width: 80%;
-            max-width: 320px;
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.2);
-        }
-
-        .login-card h2 {
-            margin-bottom: 20px;
-            font-size: 18px;
-            color: var(--neon-pink);
-            letter-spacing: 2px;
-        }
-
-        .pass-input {
-            width: 100%;
-            padding: 12px;
-            background: #161d2b;
-            border: 1px solid #2a3447;
-            border-radius: 8px;
-            color: white;
-            text-align: center;
-            font-size: 16px;
-            margin-bottom: 15px;
-            box-sizing: border-box;
-        }
-
-        /* --- Full Screen Loading --- */
-        #loader {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: var(--dark-bg);
-            display: none; /* Hidden initially */
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-        }
-
-        .loader-box {
-            width: 100px;
-            height: 100px;
-            position: relative;
-        }
-
-        .loader-box:before, .loader-box:after {
-            content: '';
-            border-radius: 50%;
-            position: absolute;
-            inset: 0;
-            box-shadow: 0 0 10px 2px var(--neon-blue) inset;
-        }
-        .loader-box:after {
-            box-shadow: 0 2px 0 var(--neon-pink) inset;
-            animation: rotate 1s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0) }
-            100% { transform: rotate(360deg) }
-        }
-
-        .loading-text {
-            margin-top: 30px;
-            font-size: 12px;
-            letter-spacing: 5px;
-            color: var(--neon-blue);
-            text-transform: uppercase;
-        }
-
-        /* --- Main App UI --- */
-        .app-container {
-            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border-top: 8px solid #dc3545;
+            max-width: 500px;
             width: 90%;
-            max-width: 380px;
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: 25px;
-            border: 1px solid rgba(0, 242, 255, 0.2);
-            text-align: center;
-            box-shadow: 0 0 40px rgba(0,0,0,1);
         }
 
-        .brand-header {
-            margin-bottom: 25px;
+        .icon {
+            font-size: 60px;
+            color: #dc3545;
+            margin-bottom: 20px;
         }
 
-        .brand-name {
-            font-size: 22px;
-            font-weight: 800;
-            background: linear-gradient(to right, #00f2ff, #ff0055);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #000;
+            text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .status-badge {
-            display: inline-block;
-            padding: 4px 12px;
-            background: rgba(0, 255, 136, 0.1);
-            color: #00ff88;
-            font-size: 10px;
-            border-radius: 50px;
-            margin-top: 8px;
-            border: 1px solid rgba(0, 255, 136, 0.3);
-        }
-
-        /* --- Input --- */
-        .input-group {
-            margin: 25px 0;
-        }
-
-        input {
-            width: 100%;
-            padding: 16px;
-            background: #161d2b;
-            border: 1px solid #2a3447;
-            border-radius: 12px;
-            color: var(--neon-blue);
-            font-size: 22px;
-            font-weight: bold;
-            text-align: center;
-            outline: none;
-            box-sizing: border-box;
-        }
-
-        .btn-predict {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(45deg, var(--neon-blue), #0072ff);
-            border: none;
-            border-radius: 12px;
-            color: #000;
-            font-weight: 900;
-            font-size: 15px;
-            cursor: pointer;
-            margin-top: 15px;
-            box-shadow: 0 5px 15px rgba(0, 242, 255, 0.3);
-        }
-
-        /* --- Signal Grid --- */
-        .signal-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 25px;
-        }
-
-        .signal-card {
-            background: #090c14;
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid rgba(255,255,255,0.03);
-        }
-
-        .card-label {
-            font-size: 9px;
-            color: #666;
-            display: block;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
-
-        .card-value {
+        p {
             font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .banned-badge {
+            display: inline-block;
+            background-color: #dc3545;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
             font-weight: bold;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
         }
 
-        .gold { color: var(--gold); }
-        .pink { color: var(--neon-pink); }
-        .blue { color: var(--neon-blue); }
-        .win { color: #00ff88; }
-
-        .active-signal {
-            border: 1px solid var(--neon-blue);
-            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
+        .footer-note {
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
         }
     </style>
 </head>
 <body>
 
-<div id="loginScreen">
-    <div class="login-card">
-        <h2>VIP ACCESS</h2>
-        <input type="password" id="passCode" class="pass-input" placeholder="ENTER PASSWORD">
-        <button class="btn-predict" onclick="checkPassword()">LOGIN</button>
-        <p id="errorMsg" style="color: red; font-size: 11px; margin-top: 10px; display: none;">මුරපදය වැරදියි! නැවත උත්සාහ කරන්න.</p>
-    </div>
-</div>
-
-<div id="loader">
-    <div class="loader-box"></div>
-    <div class="loading-text">TENIZ OFFICIAL AI DECRYPTING...</div>
-</div>
-
-<div class="app-container" id="mainApp">
-    <div class="brand-header">
-        <div class="brand-name">TENIZ OFFICIAL</div>
-        <div class="status-badge">● SERVER CONNECTED</div>
-    </div>
-
-    <div class="input-group">
-        <input type="number" id="maxOdd" placeholder="Enter Highest Odd">
-        <button class="btn-predict" id="genBtn" onclick="generatePremiumSignal()">GENERATE SIGNAL</button>
-    </div>
-
-    <div class="signal-grid">
-        <div class="signal-card" id="s1">
-            <span class="card-label">PREDICTION</span>
-            <span class="card-value gold" id="v1">--</span>
+    <div class="container">
+        <div class="icon">⚠️</div>
+        
+        <h1>Access Suspended</h1>
+        <p>This website has been completely suspended and is no longer accessible to the public.</p>
+        
+        <div class="banned-badge">
+            This Web Site Banned
         </div>
-        <div class="signal-card">
-            <span class="card-label">PROBABILITY</span>
-            <span class="card-value blue" id="v2">--</span>
-        </div>
-        <div class="signal-card">
-            <span class="card-label">SIGNAL RANK</span>
-            <span class="card-value pink" id="v3">WAIT</span>
-        </div>
-        <div class="signal-card">
-            <span class="card-label">SIGNAL TIME</span>
-            <span class="card-value win" id="v4">--:--</span>
+
+        <div class="footer-note">
+            Please contact the administrator for more information.
         </div>
     </div>
-
-    <p style="font-size: 9px; color: #333; margin-top: 20px;">POWERED BY MR.NERO PRIVATE ALGO V5</p>
-</div>
-
-<script>
-    // Password Logic
-    function checkPassword() {
-        const pass = document.getElementById("passCode").value;
-        const error = document.getElementById("errorMsg");
-
-        if (pass === "Teniz2026") {
-            // Hide login, show loader
-            document.getElementById("loginScreen").style.display = "none";
-            document.getElementById("loader").style.display = "flex";
-            
-            // Start Loading Animation
-            setTimeout(() => {
-                document.getElementById('loader').style.display = 'none';
-                document.getElementById('mainApp').style.display = 'block';
-            }, 3000);
-        } else {
-            error.style.display = "block";
-            document.getElementById("passCode").value = "";
-        }
-    }
-
-    function generatePremiumSignal() {
-        const inputVal = document.getElementById("maxOdd").value;
-        if (!inputVal) {
-            alert("කරුණාකර Odd එකක් ඇතුළත් කරන්න!");
-            return;
-        }
-
-        const btn = document.getElementById("genBtn");
-        btn.innerText = "CALCULATING...";
-        btn.disabled = true;
-
-        setTimeout(() => {
-            const min = 4.00;
-            const max = 12.00;
-            const predictedOdd = (Math.random() * (max - min) + min).toFixed(2);
-
-            document.getElementById("v1").innerText = predictedOdd + "x";
-            document.getElementById("v2").innerText = Math.floor(Math.random() * (99 - 88) + 88) + "%";
-            
-            const rank = document.getElementById("v3");
-            if (predictedOdd > 8) {
-                rank.innerText = "SUPERIOR";
-                rank.style.color = "#ff0055";
-            } else {
-                rank.innerText = "HIGH-AIM";
-                rank.style.color = "#ffcc00";
-            }
-
-            const now = new Date();
-            const timeStr = now.getHours().toString().padStart(2, '0') + ":" + 
-                            (now.getMinutes() + 1).toString().padStart(2, '0');
-            document.getElementById("v4").innerText = timeStr;
-
-            document.getElementById("s1").classList.add("active-signal");
-
-            btn.innerText = "GENERATE SIGNAL";
-            btn.disabled = false;
-        }, 1200);
-    }
-</script>
 
 </body>
 </html>
